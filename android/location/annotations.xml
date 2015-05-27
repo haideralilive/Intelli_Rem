@@ -1,0 +1,5 @@
+<root>
+    <item name='android.location.Location'>
+        <annotation name='java.lang.annotation.Deprecated' />
+    </item>
+</root>

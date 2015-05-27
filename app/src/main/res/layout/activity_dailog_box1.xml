@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#ff10090e">
+
+
+        <TextView
+            android:layout_width="341dp"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/error_net"
+            android:id="@+id/textView3"
+            android:textColor="#4fd1ffa3"
+            android:background="#ff080002" />
+
+        <Button
+            android:id="@+id/closeapp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_error_net"
+            android:layout_gravity="center_horizontal"
+            android:background="#fff39c12" />
+
+    </LinearLayout>
+
+
