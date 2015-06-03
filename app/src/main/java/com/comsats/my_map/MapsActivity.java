@@ -107,7 +107,7 @@ public class MapsActivity extends FragmentActivity{
                double lati=marker.getPosition().latitude;
                double longi=marker.getPosition().longitude;
 
-               i= new Intent(MapsActivity.this,addTask.class);
+               i= new Intent(MapsActivity.this,addtasks.class);
 
 
                Bundle b = new Bundle();
@@ -143,7 +143,7 @@ public class MapsActivity extends FragmentActivity{
                 double longi = point.longitude;
 
 
-                i= new Intent(MapsActivity.this,addTask.class);
+                i= new Intent(MapsActivity.this,addtasks.class);
 
 
                 Bundle b = new Bundle();

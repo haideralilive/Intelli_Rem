@@ -45,4 +45,5 @@
     <string name="title_activity_home_screen">home_screen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_dailog_box1">dailog_box1</string>
+    <string name="title_activity_addtasks">addtasks</string>
 </resources>

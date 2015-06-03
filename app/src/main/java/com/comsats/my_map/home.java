@@ -23,7 +23,18 @@ public class home extends ActionBarActivity {
             public void onClick(View v) {
                 i= new Intent(home.this,MapsActivity.class);
                 startActivity(i);
-                home.this.getParent().finish();
+                //home.this.getParent().finish();
+            }
+        });
+
+        Button switch_button1=(Button)findViewById(R.id.signout_button);
+        switch_button1.setOnClickListener(new View.OnClickListener() {
+            Intent i=null;
+            @Override
+            public void onClick(View v) {
+                i= new Intent(home.this,MainActivity.class);
+                startActivity(i);
+                //home.this.getParent().finish();
             }
         });
     }

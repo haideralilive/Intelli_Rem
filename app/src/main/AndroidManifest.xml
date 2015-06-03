@@ -18,26 +18,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
         <activity
             android:name=".loadingActivity"
-            android:label="@string/title_activity_loading">
+            android:label="@string/title_activity_loading" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".home"
             android:label="@string/title_activity_home"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comsats.my_map.MapsActivity" />
-
-
         </activity>
 
         <meta-data
@@ -55,8 +51,6 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comsats.my_map.MapsActivity" />
-
-
         </activity>
         <activity
             android:name=".sign_up"
@@ -66,8 +60,6 @@
             android:name=".forgot_password"
             android:label="@string/title_activity_forgot_password" >
         </activity>
-
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main" >
@@ -75,6 +67,20 @@
         <activity
             android:name=".dailog_box1"
             android:label="@string/title_activity_dailog_box1" >
+        </activity>
+        <activity
+            android:name=".addtasks"
+            android:label="@string/title_activity_addtasks"
+            android:parentActivityName=".MapsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.comsats.my_map.MapsActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

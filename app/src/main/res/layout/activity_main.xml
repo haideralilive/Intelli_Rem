@@ -57,7 +57,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginBottom="61dp"
         android:layout_alignParentEnd="true"
-        android:text="Enter your user name" />
+        android:textColorHint="#000"
+        android:hint="Enter your user name"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -68,7 +69,8 @@
         android:layout_above="@+id/login"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:text="Enter your password" />
+        android:textColorHint="#000"
+        android:hint="Enter your password"/>
 
     <TextView
         android:layout_width="wrap_content"

@@ -27,8 +27,8 @@
         android:id="@+id/welcome_label"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/map_button"
-        android:textSize="32sp"/>
+        android:textSize="32sp"
+        android:layout_alignEnd="@+id/textView" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,4 +40,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="38dp"
         android:textSize="32sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Out"
+        android:id="@+id/signout_button"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button"/>
 </RelativeLayout>
