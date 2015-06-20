@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Intelli_Rem.iml" filepath="$PROJECT_DIR$/Intelli_Rem.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my_map.iml" filepath="$PROJECT_DIR$/my_map.iml" />
     </modules>
   </component>
 </project>
