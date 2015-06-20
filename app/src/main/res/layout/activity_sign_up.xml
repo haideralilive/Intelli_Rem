@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button_submit"
-            android:onClick="call_box"
+            android:onClick="send_data"
             android:text="@string/button_signup_submit"
             android:background="#fff39c12"
             android:layout_marginBottom="82dp"
