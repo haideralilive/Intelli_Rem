@@ -26,7 +26,7 @@ public class loadingActivity extends ActionBarActivity {
                         startActivity(intent);
                     }
                 },
-                7000
+                1000
         );
 
     }

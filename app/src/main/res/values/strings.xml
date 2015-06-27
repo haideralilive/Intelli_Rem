@@ -37,13 +37,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_activity_home">Welcome</string>
 
-    <string name="title_activity_loading_screen">LoadingScreen</string>
+    <string name="title_activity_loading_screen">IntelliRem</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_activity_loading">LoadingActivity</string>
+    <string name="title_activity_loading">IntelliRem</string>
     <string name="title_activity_forgot_password">forgot_password</string>
     <string name="title_activity_home_screen">home_screen</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_dailog_box1">dailog_box1</string>
     <string name="title_activity_addtasks">addtasks</string>
+    <string name="title_activity_temp_activity_display">temp_activity_display</string>
+    <string name="title_activity_read_comments">read_comments</string>
 </resources>

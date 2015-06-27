@@ -75,12 +75,15 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.comsats.my_map.MapsActivity" />
+        </activity>
+        <activity
+            android:name=".temp_activity_display"
+            android:label="@string/title_activity_temp_activity_display" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".read_comments"
+            android:label="@string/title_activity_read_comments" >
         </activity>
     </application>
 
