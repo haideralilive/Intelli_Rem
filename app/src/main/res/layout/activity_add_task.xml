@@ -1,83 +1,85 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/finalbg"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.comsats.my_map.addTask"
     android:weightSum="1"
-    android:id="@+id/title">
+    tools:context="com.comsats.my_map.addTask">
 
 
     <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
         android:id="@+id/latitudetext"
-        android:textColor="#fff"
-        android:shadowColor="#fff"
-        android:backgroundTint="#fff"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/longitudetext"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:backgroundTint="#fff"
+        android:shadowColor="#fff"
+        android:textColor="#fff" />
 
     <EditText
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
         android:id="@+id/longitudetext"
-        android:textColor="#fff"
-        android:shadowColor="#fff"
-        android:backgroundTint="#fff"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/latitudetext" />
-
-    <EditText
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/task_name_addr"
-        android:layout_above="@+id/latitudetext"
         android:layout_alignStart="@+id/latitudetext"
-        android:layout_alignEnd="@+id/latitudetext"
+        android:layout_centerVertical="true"
         android:backgroundTint="#fff"
-        android:textColorHint="#fff"
-        android:textColor="#fff"
         android:shadowColor="#fff"
-        android:hint="Enter Task Name"/>
+        android:textColor="#fff" />
 
     <EditText
+        android:id="@+id/task_name_addr"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/task_details_text"
-        android:layout_below="@+id/longitudetext"
-        android:layout_alignStart="@+id/longitudetext"
-        android:layout_alignEnd="@+id/longitudetext"
-        android:textColor="#fff"
-        android:textColorHint="#fff"
-        android:shadowColor="#fff"
+        android:layout_above="@+id/latitudetext"
+        android:layout_alignEnd="@+id/latitudetext"
+        android:layout_alignStart="@+id/latitudetext"
         android:backgroundTint="#fff"
-        android:hint="Enter Task Details"/>
+        android:hint="Enter Task Name"
+        android:shadowColor="#fff"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
+
+    <EditText
+        android:id="@+id/task_details_text"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/longitudetext"
+        android:layout_alignStart="@+id/longitudetext"
+        android:layout_below="@+id/longitudetext"
+        android:backgroundTint="#fff"
+        android:hint="Enter Task Details"
+        android:shadowColor="#fff"
+        android:textColor="#fff"
+        android:textColorHint="#fff" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add New Task"
-        android:id="@+id/textView2"
-        android:textColor="#fff"
-        android:shadowColor="#fff"
-        android:textSize="38dp"
-        android:fontFamily="Arial"
+        android:layout_alignEnd="@+id/task_name_addr"
         android:layout_marginTop="30dp"
-        android:layout_alignEnd="@+id/task_name_addr" />
+        android:fontFamily="Arial"
+        android:shadowColor="#fff"
+        android:text="Add New Task"
+        android:textColor="#fff"
+        android:textSize="38dp" />
 
     <Button
+        android:id="@+id/add_task_button"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="Add Task"
-        android:id="@+id/add_task_button"
+        android:layout_alignEnd="@+id/task_details_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/task_details_text"
+        android:layout_marginBottom="77dp"
         android:background="@drawable/button"
         android:backgroundTint="#fff"
-        android:layout_marginBottom="77dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/task_details_text"
-        android:layout_alignStart="@+id/task_details_text" />
+        android:text="Add Task" />
 
 </RelativeLayout>

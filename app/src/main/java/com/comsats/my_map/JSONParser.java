@@ -1,4 +1,5 @@
 package com.comsats.my_map;
+
 import android.util.Log;
 
 import org.apache.http.HttpEntity;
@@ -46,7 +47,7 @@ public class JSONParser {
             HttpEntity httpEntity = httpResponse.getEntity();
             // Open an inputStream with the data content.
             is = httpEntity.getContent();
-          Log.d("return",is.toString());
+            Log.d("return", is.toString());
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -100,7 +101,7 @@ public class JSONParser {
         try {
 
             // check for request method
-            if(method == "POST"){
+            if (method == "POST") {
                 // request method is POST
                 // defaultHttpClient
                 DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -111,7 +112,7 @@ public class JSONParser {
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
 
-            }else if(method == "GET"){
+            } else if (method == "GET") {
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");

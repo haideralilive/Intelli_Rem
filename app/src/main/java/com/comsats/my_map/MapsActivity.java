@@ -1,6 +1,5 @@
 package com.comsats.my_map;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Criteria;
@@ -8,38 +7,27 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.StreetViewPanorama;
-import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.OnStreetViewPanoramaReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 
 import java.io.IOException;
 import java.util.List;
 
 import static com.comsats.my_map.R.id.map;
 
-public class MapsActivity extends FragmentActivity{
+public class MapsActivity extends FragmentActivity {
 
     GoogleMap googleMap; // Might be null if Google Play services APK is not available.
     MarkerOptions markerOptions;
@@ -51,12 +39,12 @@ public class MapsActivity extends FragmentActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        SupportMapFragment supportMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(map);
+        SupportMapFragment supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(map);
 
         // Getting a reference to the map
         googleMap = supportMapFragment.getMap();
 
-                                                                           //current location getter
+        //current location getter
 
         // Enabling MyLocation Layer of Google Map
         googleMap.setMyLocationEnabled(true);
@@ -74,7 +62,7 @@ public class MapsActivity extends FragmentActivity{
         // Getting Current Location
         Location location = locationManager.getLastKnownLocation(provider);
 
-        if(location!=null){
+        if (location != null) {
             onLocationChanged(location);
         }
 
@@ -92,34 +80,35 @@ public class MapsActivity extends FragmentActivity{
                 EditText etLocation = (EditText) findViewById(R.id.et_location);
                 // Getting user input location
                 String location = etLocation.getText().toString();
-                if(location!=null && !location.equals("")){
+                if (location != null && !location.equals("")) {
                     new GeocoderTask().execute(location);
-                    }
                 }
-            };
+            }
+        };
 
         //click on marker get value
-       googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-           Intent i=null;
-           @Override
-           public boolean onMarkerClick(Marker marker) {
+        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            Intent i = null;
 
-               double lati=marker.getPosition().latitude;
-               double longi=marker.getPosition().longitude;
+            @Override
+            public boolean onMarkerClick(Marker marker) {
 
-               i= new Intent(MapsActivity.this,addtasks.class);
+                double lati = marker.getPosition().latitude;
+                double longi = marker.getPosition().longitude;
+
+                i = new Intent(MapsActivity.this, addtasks.class);
 
 
-               Bundle b = new Bundle();
-               b.putDouble("latitude", lati);
-               b.putDouble("longitude", longi);
-               i.putExtras(b);
+                Bundle b = new Bundle();
+                b.putDouble("latitude", lati);
+                b.putDouble("longitude", longi);
+                i.putExtras(b);
 
-               startActivity(i);
+                startActivity(i);
 
-               return true;
-           }
-       });
+                return true;
+            }
+        });
 
         //end of click marker get value
 
@@ -132,7 +121,8 @@ public class MapsActivity extends FragmentActivity{
         //on map clicker
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-            Intent i=null;
+            Intent i = null;
+
             @Override
             public void onMapClick(LatLng point) {
                 // Getting latitude of the current location
@@ -143,7 +133,7 @@ public class MapsActivity extends FragmentActivity{
                 double longi = point.longitude;
 
 
-                i= new Intent(MapsActivity.this,addtasks.class);
+                i = new Intent(MapsActivity.this, addtasks.class);
 
 
                 Bundle b = new Bundle();
@@ -202,33 +192,32 @@ public class MapsActivity extends FragmentActivity{
             try {
                 // Getting a maximum of 3 Address that matches the input text
                 addresses = geocoder.getFromLocationName(locationName[0], 3);
-                } catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
-                }
-            return addresses;
             }
+            return addresses;
+        }
 
 
-
-                @Override
+        @Override
         protected void onPostExecute(List<Address> addresses) {
 
-            if(addresses==null || addresses.size()==0){
+            if (addresses == null || addresses.size() == 0) {
                 Toast.makeText(getBaseContext(), "No Location found", Toast.LENGTH_SHORT).show();
-                }
+            }
 
             // Clears all the existing markers on the map
             googleMap.clear();
 
             // Adding Markers on Google Map for each matching address
-            for(int i=0;i<addresses.size();i++){
+            for (int i = 0; i < addresses.size(); i++) {
 
-                Address address = (Address) addresses.get(i);
+                Address address = addresses.get(i);
 
                 // Creating an instance of GeoPoint, to display in Google Map
                 latLng = new LatLng(address.getLatitude(), address.getLongitude());
 
-                String addressText = String.format("%s, %s",address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "",address.getCountryName());
+                String addressText = String.format("%s, %s", address.getMaxAddressLineIndex() > 0 ? address.getAddressLine(0) : "", address.getCountryName());
 
 
                 markerOptions = new MarkerOptions();
@@ -241,19 +230,19 @@ public class MapsActivity extends FragmentActivity{
                 googleMap.addMarker(markerOptions);
 
                 // Locate the first location
-                if(i==0)
-                googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-                CameraUpdate center=
+                if (i == 0)
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+                CameraUpdate center =
                         CameraUpdateFactory.newLatLng(new LatLng(address.getLatitude(),
                                 address.getLongitude()));
-                CameraUpdate zoom=CameraUpdateFactory.zoomTo(15);
+                CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
 
                 googleMap.moveCamera(center);
                 googleMap.animateCamera(zoom);
 
-                }
             }
-       }
+        }
+    }
 
 }
 

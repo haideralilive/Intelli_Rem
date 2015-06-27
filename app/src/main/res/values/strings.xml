@@ -18,14 +18,16 @@
     <string name="button_email_sent">Send Email</string>
 
     <string name="button_signup">Register</string>
-    <string name="error_net">Sorry, cannot connect to internet Try Again</string>
-    <string name="button_error_net">Close Application </string>
+    <string name="DBox_Text_NetError">Sorry, cannot connect to internet Try Again</string>
+    <string name="DBox_Button_NetError">Close Application </string>
+    <string name="DBox_Title_NetError">Error </string>
+
 
     <string name="button_signup_submit">Submit </string>
 
     <string name="DefaultText">Empty</string>
-    <string name = "button_Login"> Log In</string>
-    <string name = "button_Password"> Forgot Your Password</string>
+    <string name="button_Login"> Log In</string>
+    <string name="button_Password"> Forgot Your Password</string>
     <string name="title_activity_map">Change Password</string>
     <string name="title_activity_activity_forgot_password">Activity_forgotPassword</string>
     <string name="title_activity_activity__sign_up">Register</string>

@@ -1,13 +1,10 @@
 package com.comsats.my_map;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class loadingActivity extends ActionBarActivity {
@@ -18,16 +15,7 @@ public class loadingActivity extends ActionBarActivity {
         setContentView(R.layout.activity_loading);
         final Intent intent;
         intent = new Intent(this, MainActivity.class);
-        new Timer().schedule(
-                new TimerTask() {
-                    @Override
-                    public void run() {
 
-                        startActivity(intent);
-                    }
-                },
-                1000
-        );
 
     }
 

@@ -1,71 +1,54 @@
 package com.comsats.my_map;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class sign_up extends ActionBarActivity {
-    private Button reg;
-    private String name, email, password;
+public class sign_up extends Activity {
+
+    private static final String LOGIN_URL = "http://www.cubicsol.com/saad_webservice/register.php";
+    private static final String TAG_SUCCESS = "success";
+    private static final String TAG_MESSAGE = "message";
+    // JSON parser class
+    JSONParser jsonParser = new JSONParser();
+    private EditText user, pass;
+    private Button mRegister;
+    // Progress Dialog
+    private ProgressDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        reg = (Button) findViewById(R.id.button_submit);
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        /*name = "Saad";
-        email = "kmsaaj@hotmail.com";
-        password = "Kmsaaj123"; //given hardcoded for now
 
 
-        Connection conn = null;
-        try {
-            String driver = "net.sourceforge.jtds.jdbc.Driver";
-            Class.forName(driver).newInstance();
-//test = com.microsoft.sqlserver.jdbc.SQLServerDriver.class;
-       //     String connString = "jdbc:jtds:sqlserver://192.168.0.1:3306/intelli_rem;";
-            String username = "root";
-            String password = "";
-            Log.w("Connection", "open");
-            conn = DriverManager.getConnection(connString, username, password);
-            //DriverManager.getConnection("jdbc:jtds:sqlserver://localhost:3306/intelli_Rem;instance=SQLEXPRESS;user=root;password=");
-            Log.w("Connection","open");
-            Statement stmt = conn.createStatement();
-            ResultSet reset = stmt.executeQuery("select * from test");
+        mRegister = (Button) findViewById(R.id.button_submit);
 
-//Print the data to the console
-            while(reset.next()){
-                Log.w("Data:",reset.getString(3));
-//              Log.w("Data",reset.getString(2));
-            }
-            conn.close();
 
-        } catch (Exception e)
-        {
-            Log.e("Error connection", "" + Log.getStackTraceString(e));        }
-    }
-*/
     }
 
     public void send_data(View view) {
-        Intent intent = new Intent(this, home.class);
-        startActivity(intent);
-    }
+        new CreateUser().execute();
 
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -87,5 +70,84 @@ public class sign_up extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    class CreateUser extends AsyncTask<String, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        boolean failure = false;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(sign_up.this);
+            pDialog.setMessage("Creating User...");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            // TODO Auto-generated method stub
+            // Check for success tag
+            int success;
+            user = (EditText) findViewById(R.id.reg_email);
+            pass = (EditText) findViewById(R.id.reg_password);
+            String username = user.getText().toString();
+            String password = pass.getText().toString();
+            try {
+                // Building Parameters
+                List<NameValuePair> params = new ArrayList<NameValuePair>();
+                params.add(new BasicNameValuePair("username", username));
+                params.add(new BasicNameValuePair("password", password));
+
+                Log.d("request!", "starting");
+
+                //Posting user data to script
+                JSONObject json = jsonParser.makeHttpRequest(
+                        LOGIN_URL, "POST", params);
+
+                // full json response
+                Log.d("Login attempt", json.toString());
+
+                // json success element
+                success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    Log.d("User Created!", json.toString());
+                    Intent intent = new Intent(sign_up.this, MainActivity.class);
+
+                    startActivity(intent);
+
+                    finish();
+                    return json.getString(TAG_MESSAGE);
+                } else {
+                    Log.d("Login Failure!", json.getString(TAG_MESSAGE));
+                    return json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * *
+         */
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once product deleted
+            pDialog.dismiss();
+            if (file_url != null) {
+                Toast.makeText(sign_up.this, file_url, Toast.LENGTH_LONG).show();
+            }
+
+        }
+
     }
 }

@@ -1,12 +1,7 @@
 package com.comsats.my_map;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
 
@@ -23,9 +18,8 @@ public class addTask extends ActionBarActivity {
         double latitudeValue = b.getDouble("latitude");
         double logitudeValue = b.getDouble("longitude");
 
-        String finallatitude= Double.toString(latitudeValue);
-        String finallongitude= Double.toString(logitudeValue);
-
+        String finallatitude = Double.toString(latitudeValue);
+        String finallongitude = Double.toString(logitudeValue);
 
 
         TextView lati = (TextView) findViewById(R.id.latitudetext);
@@ -39,7 +33,6 @@ public class addTask extends ActionBarActivity {
 
 
     }
-
 
 
 }

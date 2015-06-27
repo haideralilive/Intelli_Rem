@@ -2,11 +2,8 @@ package com.comsats.my_map;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -23,24 +20,20 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends ActionBarActivity  {
-    private static final String LOG_TAG = "NET_ERROR";
+public class MainActivity extends ActionBarActivity {
+
     private static final String LOGIN_URL = "http://www.cubicsol.com/saad_webservice/login.php";
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_MESSAGE = "message";
-    Boolean Network ;
+
     // JSON parser class
     JSONParser jsonParser = new JSONParser();
-    private DialogInterface.OnClickListener listener;
-    private Button log,forgot,reg,close ;
+
     private EditText userf, passf;
-    private Button mSubmit, mRegister;
+    private Button mSubmit, mRegister, forgot;
     // Progress Dialog
     private ProgressDialog pDialog;
 
@@ -48,102 +41,62 @@ public class MainActivity extends ActionBarActivity  {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        ConnectionTester ct = new ConnectionTester(getApplicationContext());
+        Boolean isInternetPresent = ct.isConnectingToInternet();
         forgot = (Button) findViewById(R.id.button_for);
-
-
-
         //setup buttons
         mSubmit = (Button) findViewById(R.id.login);
         mRegister = (Button) findViewById(R.id.register);
-
-        //register listeners
-
-        //mRegister.setOnClickListener(this);
-
-        //check if Internet is working or not
-        // Network=isNetworkAvailable(this);
-        Network = Boolean.TRUE;//hasActiveInternetConnection(this);
-        //AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        if (Network != Boolean.TRUE) {
+        if (isInternetPresent == Boolean.FALSE) {
             //create the dailog box
-
+            alertDialogBuilder();
         } else {
             //setting user interface
             setContentView(R.layout.activity_main);
 
         }
     }
-    public void call_Home(View v) {
-        // TODO Auto-generated method stub
 
-                new AttemptLogin().execute();
+    public void call_Home(View v) {
+
+        new AttemptLogin().execute();
 
     }
 
-public void call_Register(View view) {
+    public void call_Register(View view) {
         // Do something in response to button
         Intent intent = new Intent(this, sign_up.class);
         //setContentView(R.layout.activity_activity_home);
         startActivity(intent);
     }
 
-public void call_forgot(View view) {
+    public void call_forgot(View view) {
         // Do something in response to button
         Intent intent = new Intent(this, forgot_password.class);
         //  setContentView(R.layout.activity_activity_home);
         startActivity(intent);
     }
-public final void alertDialogBuilder(){
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Connectivity Error");
-        alertDialogBuilder.setMessage("There is no Internet Relaunch the application when connected to a network");
-        alertDialogBuilder.setCancelable(Boolean.FALSE);
+    public final void alertDialogBuilder() {
 
-        alertDialogBuilder.setPositiveButton("Close", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                //display error in a dailog box and end application
-                // Intent intent = new Intent(Intent.ACTION_MAIN);
-                //intent.addCategory(Intent.CATEGORY_HOME);
-                //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                //startActivity(intent);
+        // 1. Instantiate an AlertDialog.Builder with its constructor
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-            }});
-    }
+// 2. Chain together various setter methods to set the dialog characteristics
+        builder.setMessage(R.string.DBox_Text_NetError)
+                .setTitle(R.string.DBox_Title_NetError);
+        builder.setPositiveButton(R.string.DBox_Button_NetError, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User clicked OK button
+                        finish();
+                    }
+                }
+        )
+                .show();
+// 3. Get the AlertDialog from create()
+        AlertDialog dialog = builder.create();
 
-    public  boolean hasActiveInternetConnection(Context context) {
-        if (isNetworkAvailable(context)) {
-            try {
-                URL a = new URL("http://www.google.com");
-                HttpURLConnection url=(HttpURLConnection) a.openConnection() ;
-                url.setRequestProperty("User-Agent", "Test");
-                url.setRequestProperty("Connection", "close");
-                url.setConnectTimeout(1500);
-                url.connect();
-                return (url.getResponseCode() == 200);
-            } catch (IOException e) {
-                Log.e(LOG_TAG, "Error checking internet connection", e);
-            }
-        } else {
-            Log.d(LOG_TAG, "No network available!");
-        }
-        return false;
-    }
 
-    public boolean isNetworkAvailable(Context context) {
-        ConnectivityManager check = (ConnectivityManager)
-                this.getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo[] info = check.getAllNetworkInfo();
-        for (int i = 0; i < info.length; i++) {
-            if (info[i].getState() == NetworkInfo.State.CONNECTED) {
-                return  Boolean.TRUE;
-            } else
-                break ;
-        }
-        return  Boolean.FALSE;
     }
 
     @Override
@@ -172,7 +125,7 @@ public final void alertDialogBuilder(){
 
         /**
          * Before starting background thread Show Progress Dialog
-         * */
+         */
         boolean failure = false;
 
         @Override
@@ -194,8 +147,8 @@ public final void alertDialogBuilder(){
             passf = (EditText) findViewById(R.id.password_value);
             String username = userf.getText().toString();
             String password = passf.getText().toString();
-            Log.v("un=",userf.getText().toString());
-            Log.v("\npassword=",passf.getText().toString());
+            Log.v("un=", userf.getText().toString());
+            Log.v("\npassword=", passf.getText().toString());
 
             try {
                 // Building Parameters
@@ -219,7 +172,7 @@ public final void alertDialogBuilder(){
                     finish();
                     startActivity(i);
                     return json.getString(TAG_MESSAGE);
-                }else{
+                } else {
                     Log.d("Login Failure!", json.getString(TAG_MESSAGE));
                     return json.getString(TAG_MESSAGE);
 
@@ -231,13 +184,15 @@ public final void alertDialogBuilder(){
             return null;
 
         }
+
         /**
          * After completing background task Dismiss the progress dialog
-         * **/
+         * *
+         */
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once product deleted
             pDialog.dismiss();
-            if (file_url != null){
+            if (file_url != null) {
                 Toast.makeText(MainActivity.this, file_url, Toast.LENGTH_LONG).show();
             }
 
